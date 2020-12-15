@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { model } = require('mongoose');r
-const {thoughtController} = require("../../controllers/thought-controller");
+const { model } = require('mongoose');
+const thoughtController = require("../../controllers/thought-controller");
 
 // /api/thoughts
  router.route("/")
@@ -18,12 +18,12 @@ router.route("/:id/users/:userId")
 
 // /api/thoughts/:id/reactions
 router.route('/:id/reactions')
-    .post(addReaction)
+    .post(thoughtController.addReaction)
 
 // /api/thoughts/:id/reactions/<reactionId>
 router.route("/:id/reactions/:reactionId")
-    .put(updateReaction)
-    .delete(deleteReaction)
+    //.put(thoughtController.updateReaction)
+    .delete(thoughtController.deleteReaction)
 
 
 module.exports = router;

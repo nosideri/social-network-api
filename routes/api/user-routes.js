@@ -14,6 +14,9 @@ router.route("/:id")
       .delete(userController.deleteUser)
 
 // /api/users/:userId/friends/:friendId
+router.route("/:id/friends/:friendId")
+      .post(userController.addFriend)
+      .delete(userController.deleteFriend)
 
 
 module.exports = router;

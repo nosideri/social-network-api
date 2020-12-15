@@ -28,9 +28,24 @@ const thoughtController = {
     },
     addReaction: function(req, res) {
         db.Thought.findOneAndUpdate({_id: req.params.id}, {$push: { reactions: req.body } }, { new: true }).then(function(results){
-
+            if (!results) {
+                return res.status(404).json({message: `No thought found with the id of ${req.params.thoughtId}`});
+            }
+            res.json(results);
         })
+    },
+    deleteReaction: function(req, res) {
+        db.Thought.findOneAndUpdate({ _id: req.params.id }, { $pull: { reactions: { reactionId: req.params.reactionId } } }, { new: true }).then(function(results){
+            if (!results) {
+                return res.status(404).json({message: `No thought found with the id of ${req.params.thoughtId} or reaction id of ${req.params.reactionId}` })
+            }
+            res.json(results);
+        })
+
     }
+//     updateReaction: function(req, res) {
+//         db.Thought.findOneAndUpdate
+//     }
 }
 
 module.exports = thoughtController;
